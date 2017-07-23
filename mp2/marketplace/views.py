@@ -18,3 +18,7 @@ def userdetails(request, user_id):
 
 def registration(request):
     return render(request, 'marketplace/registration.html')
+
+
+def login(request):
+    return render(request, 'marketplace/login.html')
