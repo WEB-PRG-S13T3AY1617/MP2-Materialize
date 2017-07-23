@@ -1,47 +1,50 @@
 {% include 'marketplace/includes/header.html' %}
 
-<div class="row">
-    <div class="container">
-        <div class="col s6 offset-s3">
-            <div class="flow-text center">New Beginnings Marketplace Registration</div>
-            <div class="card-panel col s12 z-depth-4">
-                <form class="col s12">
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="first_name" type="text" class="validate">
-                            <label for="first_name">First Name</label>
+<div class="container">
+    <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sign Up</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" id="first_name" class="form-control input-sm" placeholder="First Name">
                         </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">Last Name</label>
+                        <div class="form-group">
+                            <input type="text" id="last_name" class="form-control input-sm" placeholder="Last Name">
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="username" type="text" class="validate">
-                            <label for="username">Username</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                <input type="text" id="username" class="form-control input-sm" placeholder="Username">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="password" type="password" class="validate">
-                            <label for="password">Password</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <input type="password" id="password" class="form-control input-sm" placeholder="Password">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="password2" type="password" class="validate">
-                            <label for="password2">Re-type Password</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <input type="password" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="degreeoffice" type="text" class="validate">
-                            <label for="degreeoffice">Degree Program or Office</label>
+                        <div class="form-group">
+                            <input type="text" id="degreeoffice" class="form-control input-sm" placeholder="Degree Program or Office">
                         </div>
-                    </div>
-                    <a href="#" class="btn waves-effect waves-light col s12 z-depth-2 blue" id="submitreg">SIGN UP</a>
-                </form>
+                        <input type="submit" value="Register" class="btn btn-info btn-block">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
