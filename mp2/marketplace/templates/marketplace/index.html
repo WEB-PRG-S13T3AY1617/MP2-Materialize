@@ -15,16 +15,28 @@
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-right">
+                <form class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search tags...">
                     </div>
-                    <button type="submit" class="btn btn-default">Search</button>
+                    <button type="button" class="btn btn-default">Search</button>
                 </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">Log In</a></li>
-                    <li><a data-toggle="modal" data-target="#signupModal" style="cursor:pointer;">Sign Up</a></li>
-                </ul>
+                {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logged in as {{ user.get_username }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'marketplace:logout' %}">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                    <ul id="navforms" class="nav navbar-nav navbar-right">
+                        <li><button data-toggle="modal" data-target="#loginModal" class="btn btn-default navbar-btn" style="margin-right:10px;">Log In</button></li>
+                        <li><button data-toggle="modal" data-target="#signupModal" class="btn btn-info navbar-btn" style="margin-right:10px;">Sign Up</button></li>
+                    </ul>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -37,7 +49,8 @@
                     <h4 class="modal-title">Log In</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form">
+                    <form role="form" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon">
@@ -54,10 +67,8 @@
                                 <input type="password" id="password" class="form-control input-sm" placeholder="Password">
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-info btn-block">Log In</button>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info">Log In</button>
                 </div>
             </div>
         </div>
@@ -68,10 +79,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Sign Up</h4>
+                    <h4 class="modal-title">Sign Up <small>It's free!</small></h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form">
+                    <form role="form" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <input type="text" id="first_name" class="form-control input-sm" placeholder="First Name">
                         </div>
@@ -105,10 +117,8 @@
                         <div class="form-group">
                             <input type="text" id="degreeoffice" class="form-control input-sm" placeholder="Degree Program or Office">
                         </div>
+                        <button type="submit" class="btn btn-info">Sign Up</button>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info">Sign Up</button>
                 </div>
             </div>
         </div>
@@ -134,5 +144,4 @@
     {% else %}
         <p>No posts are available.</p>
     {% endif %}
-
 {% endblock %}

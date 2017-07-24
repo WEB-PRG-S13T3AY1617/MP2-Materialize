@@ -1,0 +1,18 @@
+{% include 'marketplace/includes/header.html' %}
+
+<div class="container">
+    <form role="form" method="post" >
+        {% csrf_token %}
+        <div class="form-group">
+            {% for field in form %}
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input class="form-control" id="{{ field.id_for_label }}" maxlength="30" name="{{ field.html_name }}" type="text" placeholder="{{ field.html_name }}">
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-primary" value="Log In" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+    </form>
+</div>

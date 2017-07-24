@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404, reverse
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from marketplace.forms import RegistrationForm
 from .models import User, Post
 
 
@@ -15,3 +15,18 @@ def userdetails(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     return render(request, 'marketplace/user.html', {'user': user})
 
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            form = RegistrationForm()
+            args = {'form': form}
+            return render(request, 'marketplace/reg_form.html', args)
+    else:
+        form = RegistrationForm()
+        args = {'form': form}
+        return render(request, 'marketplace/reg_form.html', args)
