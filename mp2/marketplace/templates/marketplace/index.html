@@ -1,4 +1,5 @@
 {% include 'marketplace/includes/header.html' %}
+
 {% block content %}
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -13,21 +14,106 @@
                 <a class="navbar-brand" href="#">New Beginnings Marketplace</a>
             </div>
 
-
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-right">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search tags...">
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default">Search</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'marketplace:login' %}">Login</a></li>
-                    <li><a href="{% url 'marketplace:registration' %}">Register</a></li>
+                    <li><a data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">Log In</a></li>
+                    <li><a data-toggle="modal" data-target="#signupModal" style="cursor:pointer;">Sign Up</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Log In</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                <input type="text" id="username" class="form-control input-sm" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <input type="password" id="password" class="form-control input-sm" placeholder="Password">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info">Log In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Sign Up</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" id="first_name" class="form-control input-sm" placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                <input type="text" id="username" class="form-control input-sm" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <input type="password" id="password" class="form-control input-sm" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <input type="password" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="degreeoffice" class="form-control input-sm" placeholder="Degree Program or Office">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     {% if latest_post_list %}
         <div class="container">

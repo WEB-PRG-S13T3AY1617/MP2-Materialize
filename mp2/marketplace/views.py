@@ -15,10 +15,3 @@ def userdetails(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     return render(request, 'marketplace/user.html', {'user': user})
 
-
-def registration(request):
-    return render(request, 'marketplace/registration.html')
-
-
-def login(request):
-    return render(request, 'marketplace/login.html')

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Django default" uuid="3389c751-ef73-4915-8703-de77379b5f2c">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/mp2/settings.py</remarks>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\Denrick\GitHub\MP2-Materialize\mp2\db.sqlite3</jdbc-url>
+      <driver-properties>
+        <property name="enable_load_extension" value="true" />
+      </driver-properties>
+    </data-source>
+  </component>
+</project>

@@ -1,4 +1,32 @@
-<h1>{{ user.first_name }} {{ user.last_name }}</h1>
+{% include 'marketplace/includes/header.html' %}
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">{{ user.first_name }} {{ user.last_name }}</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search tags...">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">Log In</a></li>
+                <li><a data-toggle="modal" data-target="#signupModal" style="cursor:pointer;">Sign Up</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <div>
