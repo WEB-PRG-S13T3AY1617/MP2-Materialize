@@ -1,5 +1,22 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+{% include 'marketplace/includes/header.html' %}
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Sign Up</h3></div>
+        <div class="panel-body">
+            <form role="form" method="post" >
+                {% csrf_token %}
+                <div class="form-group">
+                    {% for field in form %}
+                        <div class="input-group">
+                            <input class="form-control input-sm" id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="text" placeholder="{{ field.html_name }}">
+                            {{ field.errors }}
+                        </div>
+                    {% endfor %}
+                    <input type="submit" class="btn btn-primary" value="Sign Up">
+                    <input type="hidden" name="next" value="{{ next }}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
