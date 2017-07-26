@@ -6,7 +6,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
-    degree_or_office = models.CharField(max_length=30, default='')
+    degree_or_office = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return self.username
@@ -23,7 +23,7 @@ class Post(models.Model):
         ('2', 'Office'),
     )
     academic_or_office = models.CharField(max_length=1, choices=CHOICES, default='')
-    course = models.CharField(max_length=20, default='')
+    course = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
         return self.name
