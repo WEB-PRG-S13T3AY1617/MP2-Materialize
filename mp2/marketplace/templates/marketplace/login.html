@@ -10,13 +10,6 @@
                 <form role="form" method="post" >
                     {% csrf_token %}
                     <div class="form-group">
-                        {% comment %}{% for field in form %}
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                            <input class="form-control input-sm" id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="text" placeholder="{{ field.html_name }}">
-                            {{ field.errors }}
-                        </div>
-                    {% endfor %}{% endcomment %}
                         {% for error in form.non_field_errors %}
                             <div class="form-group has-errors text-danger small">
                                 {{error}}

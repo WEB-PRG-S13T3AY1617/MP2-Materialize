@@ -1,11 +1,14 @@
 {% load staticfiles %}
-{% block head %}
-    <link type="text/css" rel="stylesheet" href="{% static "marketplace/css/bootstrap.min.css" %}"/>
-    <link type="text/css" rel="stylesheet" href="{% static "marketplace/css/edited.css" %}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static "marketplace/js/bootstrap.min.js" %}"></script>
-{% endblock %}
+<head>
+    {% block head %}
+        <link type="text/css" rel="stylesheet" href="{% static "marketplace/css/bootstrap.min.css" %}"/>
+        <link type="text/css" rel="stylesheet" href="{% static "marketplace/css/edited.css" %}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static "marketplace/js/bootstrap.min.js" %}"></script>
+        <title>{% block title %}New Beginnings Marketplace{% endblock %}</title>
+    {% endblock %}
+</head>
 {% block header %}
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
