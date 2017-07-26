@@ -16,6 +16,11 @@ def userdetails(request, user_id):
     return render(request, 'marketplace/user.html', {'user': user})
 
 
+def postdetails(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    return render(request, 'marketplace/post.html', {'post': post})
+
+
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

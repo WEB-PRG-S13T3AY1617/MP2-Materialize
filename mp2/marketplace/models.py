@@ -14,6 +14,7 @@ class User(models.Model):
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    image = models.ImageField(upload_to='marketplace/static/marketplace/img/', blank=True, default='marketplace/static/marketplace/img/def/default.png')
     name = models.CharField(max_length=50)
     condition = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
