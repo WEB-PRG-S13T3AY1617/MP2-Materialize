@@ -6,10 +6,9 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static "marketplace/js/bootstrap.min.js" %}"></script>
 {% endblock %}
-{% block body %}
+{% block header %}
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -17,7 +16,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">New Beginnings Marketplace</a>
+                {% block navtitle %}
+                    <a class="navbar-brand" href="#">New Beginnings Marketplace</a>
+                {% endblock %}
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -129,4 +130,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block body %}
+    block body
 {% endblock %}

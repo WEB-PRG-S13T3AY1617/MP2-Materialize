@@ -17,13 +17,12 @@ class Post(models.Model):
     image = models.ImageField(upload_to='marketplace/static/marketplace/img/', blank=True, default='marketplace/static/marketplace/img/def/default.png')
     name = models.CharField(max_length=50)
     condition = models.CharField(max_length=50)
-    type = models.CharField(max_length=50)
     quantity = models.IntegerField(default=1)
     CHOICES = (
         ('1', 'Academic'),
         ('2', 'Office'),
     )
-    academic_or_office = models.CharField(max_length=1, choices=CHOICES, default='')
+    type = models.CharField(max_length=1, choices=CHOICES, default='')
     course = models.CharField(max_length=20, blank=True)
 
     def __str__(self):

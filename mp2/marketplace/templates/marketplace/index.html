@@ -1,6 +1,6 @@
-{% include 'marketplace/includes/header.html' %}
+{% extends 'marketplace/includes/header.html' %}
 
-{% block content %}
+{% block body %}
     <div class="container">
         {% if user.is_authenticated %}
             <div class="panel panel-default">
@@ -18,24 +18,36 @@
             </div>
         {% endif %}
         {% if latest_post_list %}
+            <div class="row">
             {% for post in latest_post_list %}
-                <div class="panel panel-default">
+                {% comment %}<div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><a href="{% url 'marketplace:postdetails' post.id %}">{{ post.name }}</a></h3>
                     </div>
                     <div class="panel-body">
                         {% load staticfiles %}
                         <img src="{{ post.image.url }}" width="150px">
-
-                        {{ post.image }}
                         by
                         <a href="{% url 'marketplace:userdetails' post.user.id %}">
                             {{ post.user }}
                         </a>
                     </div>
-                </div>
-            {% endfor %}
+                </div>{% endcomment %}
 
+                    <div class="col-sm-5 col-md-3">
+                        <div class="thumbnail">
+                            <a href="{% url 'marketplace:postdetails' post.id %}"><img src="{{ post.image.url }}"></a>
+                            <div class="caption">
+                                <h3 class="panel-title"><a href="{% url 'marketplace:postdetails' post.id %}">{{ post.name }}</a></h3>
+                                <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
+                                    {{ post.user }}
+                                </a></p>
+                            </div>
+                        </div>
+                    </div>
+
+            {% endfor %}
+            </div>
         {% else %}
             <p>No posts are available.</p>
         {% endif %}
