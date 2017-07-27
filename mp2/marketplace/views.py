@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from marketplace.forms import RegistrationForm
+from marketplace.forms import RegistrationForm, PostForm
 from .models import User, Post
 
 
 def index(request):
-    latest_post_list = Post.objects.order_by('-id')[:10]
+    latest_post_list = Post.objects.order_by('-id')
     context = {
         'latest_post_list': latest_post_list
     }
@@ -14,6 +14,22 @@ def index(request):
 def userdetails(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     return render(request, 'marketplace/user.html', {'userprofile': user})
+
+
+def post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            form = PostForm()
+            args = {'form': form}
+            return render(request, 'marketplace/post.html', args)
+    else:
+        form = PostForm()
+        args = {'form': form}
+        return render(request, 'marketplace/post.html', args)
 
 
 def register(request):

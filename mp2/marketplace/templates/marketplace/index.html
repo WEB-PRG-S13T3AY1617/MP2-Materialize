@@ -1,7 +1,21 @@
 {% extends 'marketplace/includes/header.html' %}
 
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            var loadbtn = $('#loadmore');
+            var postcount = {{ latest_post_list|length }};
+            loadbtn.hide();
+
+            if (postcount > 10){
+                loadbtn.show();
+            }
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
-    <div class="container">
+    <div id="lolol" class="container">
         {% if user.is_authenticated %}
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -20,9 +34,9 @@
         {% if latest_post_list %}
             <div class="row">
                 {% for post in latest_post_list %}
-                    <div class="col-sm-5 col-md-3">
+                    <div class="col-sm-6 col-md-3">
                         <div class="thumbnail">
-                            <a data-toggle="modal" data-target="#postModal{{ post.id }}" href=""><img src="{{ post.image.url }}"></a>
+                            <a data-toggle="modal" data-target="#postModal{{ post.id }}" href=""><img src="{{ post.image.url }}" style="height:200px;"></a>
                             <div class="caption">
                                 <h3 class="panel-title"><a data-toggle="modal" data-target="#postModal{{ post.id }}" href="">{{ post.name }}</a></h3>
                                 <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
@@ -42,18 +56,18 @@
                                 <div class="modal-body">
                                     <img class="center-block" src="{{ post.image }}" height="245px">
                                 </div>
-                                <div class="modal-footer">
-                                    <h4><strong>Quantity:</strong></h4>
+                                <div class="modal-footer" style="text-align: left">
+                                    <h4><strong>Quantity</strong></h4>
                                     <p>{{ post.quantity }}</p>
-                                    <h4><strong>Condition:</strong></h4>
+                                    <h4><strong>Condition</strong></h4>
                                     <p>{{ post.condition }}</p>
-                                    <h4><strong>Type:</strong></h4>
+                                    <h4><strong>Type</strong></h4>
                                     <p>{{ post.type }}</p>
                                     {% if post.course %}
-                                        <h4><strong>Course(if academic):</strong></h4>
+                                        <h4><strong>Course</strong></h4>
                                         <p>{{ post.course }}</p>
                                     {% endif %}
-                                    <h4><strong>User:</strong></h4>
+                                    <h4><strong>User</strong></h4>
                                     <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
                                         {{ post.user }}
                                     </a></p>
@@ -63,8 +77,9 @@
                     </div>
                 {% endfor %}
             </div>
+        <button id="loadmore" class="btn btn-block btn-info" style="margin-bottom:10px;">LOAD MORE</button>
         {% else %}
-            <p>No posts are available.</p>
+            <div class="alert-danger">No posts are available.</div>
         {% endif %}
     </div>
 {% endblock %}

@@ -1,10 +1,8 @@
 {% extends 'marketplace/includes/header.html' %}
 
-{% if userprofile.username == 'admin' %}
-    {% block navtitle %}
-        <a class="navbar-brand" href="#">{{ userprofile.first_name }} {{ userprofile.last_name }}</a>
-    {% endblock %}
-{% endif %}
+{% block navtitle %}
+    <a class="navbar-brand" href="#">{{ userprofile.first_name }} {{ userprofile.last_name }}</a>
+{% endblock %}
 {% block body %}
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <div>
