@@ -16,21 +16,6 @@
 
 {% block body %}
     <div id="lolol" class="container">
-        {% if user.is_authenticated %}
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <form method="post" role="form">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Write something...">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-info">Submit</button>
-                    </form>
-                </div>
-            </div>
-        {% endif %}
         {% if latest_post_list %}
             <div class="row">
                 {% for post in latest_post_list %}
@@ -71,6 +56,7 @@
                                     <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
                                         {{ post.user }}
                                     </a></p>
+
                                 </div>
                             </div>
                         </div>

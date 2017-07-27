@@ -40,6 +40,7 @@
                                 <li><a href="{% url 'marketplace:logout' %}">Logout</a></li>
                             </ul>
                         </li>
+                        <li><button data-toggle="modal" data-target="#postModal" class="btn btn-info navbar-btn" style="margin-right:10px;">Post</button></li>
                     </ul>
                 {% endif %}
                 {% if not user.is_authenticated %}
@@ -67,7 +68,7 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-user"></span>
                                 </span>
-                                <input type="text" id="username" name="username" class="form-control input-sm" placeholder="Username">
+                                <input type="text" id="id_username" name="username" class="form-control input-sm" placeholder="Username">
                             </div>
                         </div>
                         <div class="form-group">
@@ -75,10 +76,11 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock"></span>
                                 </span>
-                                <input type="password" id="password" name="password" class="form-control input-sm" placeholder="Password">
+                                <input type="password" id="id_password" name="password" class="form-control input-sm" placeholder="Password">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-info btn-block">Log In</button>
+                        <input type="hidden" name="next" value="{{ next }}">
                     </form>
                 </div>
             </div>
@@ -129,6 +131,48 @@
                             <input type="text" id="id_degree_or_office" name="degree_or_office" class="form-control input-sm" placeholder="Degree Program or Office">
                         </div>
                         <button type="submit" class="btn btn-info">Sign Up</button>
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="postModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Post Something <small>Like your insecurities!</small></h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="file" id="id_image" name="image" accept="image/*" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="id_name" name="name" class="form-control input-sm" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="id_condition" name="condition" class="form-control input-sm" placeholder="Condition">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" min="1" id="id_quantity" name="quantity" class="form-control input-sm" placeholder="Quantity">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="id_type" name="type">
+                                <option value="Academic">Academic</option>
+                                <option value="Office">Office</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="id_course" name="course" class="form-control input-sm" placeholder="Course">
+                        </div>
+                        {% comment %}<div class="form-group">
+                            <input type="text" id="id_tags" name="tags" class="form-control input-sm" placeholder="Tags">
+                        </div>{% endcomment %}
+                        <button type="submit" class="btn btn-info btn-block">Post Item</button>
                         <input type="hidden" name="next" value="{{ next }}">
                     </form>
                 </div>

@@ -35,8 +35,8 @@ class RegistrationForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     name = forms.CharField(required=True)
     condition = forms.CharField(required=True)
-    type = forms.CharField(required=True)
-    quantity = forms.IntegerField(required=True, min_value=1)
+    type = forms.ChoiceField(choices=Post.CHOICES, required=True)
+    quantity = forms.IntegerField(required=True, initial='1', min_value=1)
 
     class Meta:
         model = Post
@@ -51,7 +51,7 @@ class PostForm(forms.ModelForm):
         )
 
     def save(self, commit=True):
-        post = self.save(commit=False)
+        post = super(PostForm, self).save(commit=False)
         post.name = self.cleaned_data['name']
         post.condition = self.cleaned_data['condition']
         post.type = self.cleaned_data['type']
