@@ -3,14 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1d637aa0-8cc7-4c47-a411-3e4a33dfd231" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marketplace/admin.py" afterPath="$PROJECT_DIR$/marketplace/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marketplace/models.py" afterPath="$PROJECT_DIR$/marketplace/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marketplace/templates/marketplace/includes/header.html" afterPath="$PROJECT_DIR$/marketplace/templates/marketplace/includes/header.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marketplace/templates/marketplace/index.html" afterPath="$PROJECT_DIR$/marketplace/templates/marketplace/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marketplace/templates/marketplace/user.html" afterPath="$PROJECT_DIR$/marketplace/templates/marketplace/user.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marketplace/urls.py" afterPath="$PROJECT_DIR$/marketplace/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marketplace/views.py" afterPath="$PROJECT_DIR$/marketplace/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mp2/settings.py" afterPath="$PROJECT_DIR$/mp2/settings.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,13 +24,25 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="66" column="73" lean-forward="false" selection-start-line="66" selection-start-column="65" selection-end-line="66" selection-end-column="73" />
+            <state relative-caret-position="199">
+              <caret line="202" column="70" lean-forward="true" selection-start-line="202" selection-start-column="70" selection-end-line="202" selection-end-column="70" />
               <folding>
                 <element signature="e#1878#1906#0#HTML" expanded="true" />
                 <element signature="e#2537#2559#0#HTML" expanded="true" />
-                <element signature="e#5587#5609#0#HTML" expanded="true" />
-                <element signature="e#8639#8661#0#HTML" expanded="true" />
+                <element signature="e#6215#6237#0#HTML" expanded="true" />
+                <element signature="e#9895#9917#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="results.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/results.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="19" column="34" lean-forward="true" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+              <folding>
+                <element signature="e#467#489#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -42,8 +51,8 @@
       <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/includes/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="38" column="35" lean-forward="false" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="35" />
+            <state relative-caret-position="168">
+              <caret line="8" column="80" lean-forward="true" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -52,8 +61,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/marketplace/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
+            <state relative-caret-position="2646">
+              <caret line="126" column="40" lean-forward="true" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="40" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -61,11 +70,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="image.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/image.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="26" lean-forward="true" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/user.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+            <state relative-caret-position="3150">
+              <caret line="150" column="10" lean-forward="false" selection-start-line="150" selection-start-column="10" selection-end-line="150" selection-end-column="10" />
               <folding>
                 <element signature="n#style#0;n#h2#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -91,8 +110,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/marketplace/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="79" lean-forward="false" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
+            <state relative-caret-position="315">
+              <caret line="15" column="86" lean-forward="true" selection-start-line="15" selection-start-column="86" selection-end-line="15" selection-end-column="86" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -122,18 +141,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/marketplace/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="3" column="25" lean-forward="false" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -154,6 +161,7 @@
       <find>latest_po</find>
       <find>href</find>
       <find>postmoda</find>
+      <find>post</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,14 +185,16 @@
         <option value="$PROJECT_DIR$/marketplace/templates/marketplace/post.html" />
         <option value="$PROJECT_DIR$/marketplace/templates/marketplace/reg_form.html" />
         <option value="$PROJECT_DIR$/marketplace/templates/marketplace/login.html" />
-        <option value="$PROJECT_DIR$/marketplace/urls.py" />
         <option value="$PROJECT_DIR$/marketplace/admin.py" />
         <option value="$PROJECT_DIR$/mp2/settings.py" />
         <option value="$PROJECT_DIR$/marketplace/forms.py" />
         <option value="$PROJECT_DIR$/marketplace/models.py" />
-        <option value="$PROJECT_DIR$/marketplace/templates/marketplace/includes/header.html" />
-        <option value="$PROJECT_DIR$/marketplace/views.py" />
+        <option value="$PROJECT_DIR$/marketplace/templates/marketplace/image.html" />
+        <option value="$PROJECT_DIR$/marketplace/urls.py" />
+        <option value="$PROJECT_DIR$/marketplace/templates/marketplace/results.html" />
         <option value="$PROJECT_DIR$/marketplace/templates/marketplace/index.html" />
+        <option value="$PROJECT_DIR$/marketplace/views.py" />
+        <option value="$PROJECT_DIR$/marketplace/templates/marketplace/includes/header.html" />
         <option value="$PROJECT_DIR$/marketplace/templates/marketplace/user.html" />
       </list>
     </option>
@@ -201,7 +211,9 @@
     <option name="width" value="1938" />
     <option name="height" value="1048" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -573,29 +585,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/marketplace/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="86" lean-forward="true" selection-start-line="7" selection-start-column="86" selection-end-line="7" selection-end-column="86" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="32" column="20" lean-forward="false" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-          <folding>
-            <element signature="e#1878#1906#0#HTML" expanded="true" />
-            <element signature="e#2537#2559#0#HTML" expanded="true" />
-            <element signature="e#5587#5609#0#HTML" expanded="true" />
-            <element signature="e#8639#8661#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mp2/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -797,6 +786,24 @@
         <state relative-caret-position="42">
           <caret line="3" column="25" lean-forward="false" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
           <folding>
+            <element signature="e#0#32#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mp2/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1292">
+          <caret line="40" column="18" lean-forward="false" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/marketplace/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="86" lean-forward="true" selection-start-line="15" selection-start-column="86" selection-end-line="15" selection-end-column="86" />
+          <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
@@ -812,16 +819,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/marketplace/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="79" lean-forward="false" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/marketplace/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="388">
@@ -832,54 +829,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mp2/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1292">
-          <caret line="40" column="18" lean-forward="false" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/marketplace/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
+        <state relative-caret-position="2646">
+          <caret line="126" column="40" lean-forward="true" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="40" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/includes/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="38" column="35" lean-forward="false" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="66" column="73" lean-forward="false" selection-start-line="66" selection-start-column="65" selection-end-line="66" selection-end-column="73" />
+        <state relative-caret-position="199">
+          <caret line="202" column="70" lean-forward="true" selection-start-line="202" selection-start-column="70" selection-end-line="202" selection-end-column="70" />
           <folding>
             <element signature="e#1878#1906#0#HTML" expanded="true" />
             <element signature="e#2537#2559#0#HTML" expanded="true" />
-            <element signature="e#5587#5609#0#HTML" expanded="true" />
-            <element signature="e#8639#8661#0#HTML" expanded="true" />
+            <element signature="e#6215#6237#0#HTML" expanded="true" />
+            <element signature="e#9895#9917#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/includes/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="80" lean-forward="true" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/user.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+        <state relative-caret-position="3150">
+          <caret line="150" column="10" lean-forward="false" selection-start-line="150" selection-start-column="10" selection-end-line="150" selection-end-column="10" />
           <folding>
             <element signature="n#style#0;n#h2#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/image.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="26" lean-forward="true" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" column="34" lean-forward="true" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <folding>
+            <element signature="e#467#489#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

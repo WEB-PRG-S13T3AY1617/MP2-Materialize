@@ -70,7 +70,11 @@
                                 <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
                                     {{ post.user }}
                                 </a></p>
-                                <p><small>Tags: {{post.tags.all|join:", "}}</small></p>
+                                <p><small>Tags:
+                                    {% for t in post.tags.all %}
+                                        <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
+                                    {% endfor %}
+                                </small></p>
                             </div>
                         </div>
                     </div>
@@ -83,21 +87,23 @@
                                     <h4 class="modal-title">{{ post.name }}</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <img class="center-block" src="{{ post.image.url }}" height="245px">
+                                    <a href="{% url 'marketplace:photo' post.id %}"><img class="center-block" src="{{ post.image.url }}" height="245px"></a>
                                 </div>
                                 <div class="modal-footer" style="text-align: left">
                                     <h4><strong>Quantity</strong></h4>
                                     <p>{{ post.quantity }}</p>
                                     <h4><strong>Condition</strong></h4>
-                                    <p>{{ post.condition }}</p>
+                                    <p><a href="{% url 'marketplace:condresults' post.condition %}">{{ post.condition }}</a></p>
                                     <h4><strong>Type</strong></h4>
-                                    <p>{{ post.type }}</p>
+                                    <p><a href="{% url 'marketplace:typeresults' post.type %}">{{ post.type }}</a></p>
                                     {% if post.course %}
                                         <h4><strong>Course</strong></h4>
-                                        <p>{{ post.course }}</p>
+                                        <p><a href="{% url 'marketplace:courseresults' post.course %}">{{ post.course }}</a></p>
                                     {% endif %}
                                     <h4><strong>Tags</strong></h4>
-                                    <p>{{post.tags.all|join:", "}}</p>
+                                    <p>{% for t in post.tags.all %}
+                                        <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
+                                    {% endfor %}</p>
                                     <h4><strong>User</strong></h4>
                                     <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
                                         {{ post.user }}
@@ -119,7 +125,11 @@
                                 <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
                                     {{ post.user }}
                                 </a></p>
-                                <p><small>Tags: {{post.tags.all|join:", "}}</small></p>
+                                <p><small>Tags:
+                                    {% for t in post.tags.all %}
+                                        <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
+                                    {% endfor %}
+                                </small></p>
                             </div>
                         </div>
                     </div>
@@ -132,21 +142,23 @@
                                     <h4 class="modal-title">{{ post.name }}</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <img class="center-block" src="{{ post.image.url }}" height="245px">
+                                    <a href="{% url 'marketplace:photo' post.id %}"><img class="center-block" src="{{ post.image.url }}" height="245px"></a>
                                 </div>
                                 <div class="modal-footer" style="text-align: left">
                                     <h4><strong>Quantity</strong></h4>
                                     <p>{{ post.quantity }}</p>
                                     <h4><strong>Condition</strong></h4>
-                                    <p>{{ post.condition }}</p>
+                                    <p><a href="{% url 'marketplace:condresults' post.condition %}">{{ post.condition }}</a></p>
                                     <h4><strong>Type</strong></h4>
-                                    <p>{{ post.type }}</p>
+                                    <p><a href="{% url 'marketplace:typeresults' post.type %}">{{ post.type }}</a></p>
                                     {% if post.course %}
                                         <h4><strong>Course</strong></h4>
-                                        <p>{{ post.course }}</p>
+                                        <p><a href="{% url 'marketplace:courseresults' post.course %}">{{ post.course }}</a></p>
                                     {% endif %}
                                     <h4><strong>Tags</strong></h4>
-                                    <p>{{post.tags.all|join:", "}}</p>
+                                    <p>{% for t in post.tags.all %}
+                                        <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
+                                    {% endfor %}</p>
                                     <h4><strong>User</strong></h4>
                                     <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
                                         {{ post.user }}
@@ -168,7 +180,11 @@
                                 <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
                                     {{ post.user }}
                                 </a></p>
-                                <p><small>Tags: {{post.tags.all|join:", "}}</small></p>
+                                <p><small>Tags:
+                                    {% for t in post.tags.all %}
+                                        <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
+                                    {% endfor %}
+                                </small></p>
                             </div>
                         </div>
                     </div>
@@ -181,21 +197,23 @@
                                     <h4 class="modal-title">{{ post.name }}</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <img class="center-block" src="{{ post.image.url }}" height="245px">
+                                    <a href="{% url 'marketplace:photo' post.id %}"><img class="center-block" src="{{ post.image.url }}" height="245px"></a>
                                 </div>
                                 <div class="modal-footer" style="text-align: left">
                                     <h4><strong>Quantity</strong></h4>
                                     <p>{{ post.quantity }}</p>
                                     <h4><strong>Condition</strong></h4>
-                                    <p>{{ post.condition }}</p>
+                                    <p><a href="{% url 'marketplace:condresults' post.condition %}">{{ post.condition }}</a></p>
                                     <h4><strong>Type</strong></h4>
-                                    <p>{{ post.type }}</p>
+                                    <p><a href="{% url 'marketplace:typeresults' post.type %}">{{ post.type }}</a></p>
                                     {% if post.course %}
                                         <h4><strong>Course</strong></h4>
-                                        <p>{{ post.course }}</p>
+                                        <p><a href="{% url 'marketplace:courseresults' post.course %}">{{ post.course }}</a></p>
                                     {% endif %}
                                     <h4><strong>Tags</strong></h4>
-                                    <p>{{post.tags.all|join:", "}}</p>
+                                    <p>{% for t in post.tags.all %}
+                                        <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
+                                    {% endfor %}</p>
                                     <h4><strong>User</strong></h4>
                                     <p><a href="{% url 'marketplace:userdetails' post.user.id %}">
                                         {{ post.user }}

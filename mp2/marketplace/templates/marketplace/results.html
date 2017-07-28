@@ -1,0 +1,61 @@
+{% extends 'marketplace/includes/header.html' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for p in post %}
+                <div class="col-sm-6 col-md-3">
+                        <div class="thumbnail">
+                            <a data-toggle="modal" data-target="#postModal{{ p.id }}" href="javascript:void(0);"><img src="{{ p.image.url }}" style="height:200px;"></a>
+                            <div class="caption" style="height: 120px;">
+                                <h3 class="panel-title"><a data-toggle="modal" data-target="#postModal{{ p.id }}" href="javascript:void(0);">{{ p.name }}</a></h3>
+                                <p><a href="{% url 'marketplace:userdetails' p.user.id %}">
+                                    {{ p.user }}
+                                </a></p>
+                                <p><small>Tags:
+                                    {% for t in p.tags.all %}
+                                        <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
+                                    {% endfor %}
+                                </small></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="postModal{{ p.id }}" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">{{ p.name }}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <a href="{% url 'marketplace:photo' p.id %}"><img class="center-block" src="{{ p.image.url }}" height="245px"></a>
+                                </div>
+                                <div class="modal-footer" style="text-align: left">
+                                    <h4><strong>Quantity</strong></h4>
+                                    <p>{{ p.quantity }}</p>
+                                    <h4><strong>Condition</strong></h4>
+                                    <p><a href="{% url 'marketplace:condresults' p.condition %}">{{ p.condition }}</a></p>
+                                    <h4><strong>Type</strong></h4>
+                                    <p><a href="{% url 'marketplace:typeresults' p.type %}">{{ p.type }}</a></p>
+                                    {% if p.course %}
+                                        <h4><strong>Course</strong></h4>
+                                        <p><a href="{% url 'marketplace:courseresults' p.course %}">{{ p.course }}</a></p>
+                                    {% endif %}
+                                    <h4><strong>Tags</strong></h4>
+                                    <p>{% for t in p.tags.all %}
+                                        <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
+                                    {% endfor %}</p>
+                                    <h4><strong>User</strong></h4>
+                                    <p><a href="{% url 'marketplace:userdetails' p.user.id %}">
+                                        {{ p.user }}
+                                    </a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'marketplace/includes/header.html' %}
+
+{% block body %}
+    {% for item in post %}
+        <img src='{{ item.image.url }}'>
+    {% endfor %}
+{% endblock %}
