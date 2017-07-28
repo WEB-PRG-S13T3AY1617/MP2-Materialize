@@ -31,7 +31,7 @@ def index(request):
                 'regform': regform,
                 'postform': postform,
             }
-            return login(request, context, template_name='index')
+            return login(request, context, template_name='marketplace/err.html')
     else:
         postform = PostForm()
         regform = RegistrationForm()
@@ -67,7 +67,7 @@ def userdetails(request, user_id):
                 'regform': regform,
                 'postform': postform,
             }
-            return login(request, context, template_name='userdetails')
+            return login(request, context, template_name='marketplace/err.html')
     else:
         regform = RegistrationForm()
         postform = PostForm()
@@ -102,7 +102,7 @@ def photo(request, post_id):
                 'regform': regform,
                 'postform': postform,
             }
-            return login(request, context, template_name='photo')
+            return login(request, context, template_name='marketplace/err.html')
     else:
         regform = RegistrationForm()
         postform = PostForm()
@@ -116,19 +116,135 @@ def photo(request, post_id):
 
 def condresults(request, condition_name):
     postobj = Post.objects.filter(condition=condition_name)
-    return render(request, 'marketplace/results.html', {'post': postobj})
+    if request.method == 'POST':
+        regform = RegistrationForm(request.POST)
+        postform = PostForm(request.POST, request.FILES)
+        if regform.is_valid():
+            regform.save()
+            return redirect('/')
+        elif request.user.is_authenticated():
+            if postform.is_valid():
+                obj = postform.save(commit=False)
+                obj.user = request.user
+                obj.image = postform.cleaned_data['image']
+                obj.save()
+                postform.save_m2m()
+                return redirect('/')
+        else:
+            context = {
+                'post': postobj,
+                'regform': regform,
+                'postform': postform,
+            }
+            return login(request, context, template_name='marketplace/err.html')
+    else:
+        regform = RegistrationForm()
+        postform = PostForm()
+        context = {
+            'post': postobj,
+            'regform': regform,
+            'postform': postform,
+        }
+        return render(request, 'marketplace/results.html', context)
 
 
 def typeresults(request, type_name):
     postobj = Post.objects.filter(type=type_name)
-    return render(request, 'marketplace/results.html', {'post': postobj})
+    if request.method == 'POST':
+        regform = RegistrationForm(request.POST)
+        postform = PostForm(request.POST, request.FILES)
+        if regform.is_valid():
+            regform.save()
+            return redirect('/')
+        elif request.user.is_authenticated():
+            if postform.is_valid():
+                obj = postform.save(commit=False)
+                obj.user = request.user
+                obj.image = postform.cleaned_data['image']
+                obj.save()
+                postform.save_m2m()
+                return redirect('/')
+        else:
+            context = {
+                'post': postobj,
+                'regform': regform,
+                'postform': postform,
+            }
+            return login(request, context, template_name='marketplace/err.html')
+    else:
+        regform = RegistrationForm()
+        postform = PostForm()
+        context = {
+            'post': postobj,
+            'regform': regform,
+            'postform': postform,
+        }
+        return render(request, 'marketplace/results.html', context)
 
 
 def courseresults(request, course_name):
     postobj = Post.objects.filter(course=course_name)
-    return render(request, 'marketplace/results.html', {'post': postobj})
+    if request.method == 'POST':
+        regform = RegistrationForm(request.POST)
+        postform = PostForm(request.POST, request.FILES)
+        if regform.is_valid():
+            regform.save()
+            return redirect('/')
+        elif request.user.is_authenticated():
+            if postform.is_valid():
+                obj = postform.save(commit=False)
+                obj.user = request.user
+                obj.image = postform.cleaned_data['image']
+                obj.save()
+                postform.save_m2m()
+                return redirect('/')
+        else:
+            context = {
+                'post': postobj,
+                'regform': regform,
+                'postform': postform,
+            }
+            return login(request, context, template_name='marketplace/err.html')
+    else:
+        regform = RegistrationForm()
+        postform = PostForm()
+        context = {
+            'post': postobj,
+            'regform': regform,
+            'postform': postform,
+        }
+        return render(request, 'marketplace/results.html', context)
 
 
 def tagresults(request, tag_name):
     postobj = Post.objects.filter(tags__name__in=[tag_name]).distinct()
-    return render(request, 'marketplace/results.html', {'post': postobj})
+    if request.method == 'POST':
+        regform = RegistrationForm(request.POST)
+        postform = PostForm(request.POST, request.FILES)
+        if regform.is_valid():
+            regform.save()
+            return redirect('/')
+        elif request.user.is_authenticated():
+            if postform.is_valid():
+                obj = postform.save(commit=False)
+                obj.user = request.user
+                obj.image = postform.cleaned_data['image']
+                obj.save()
+                postform.save_m2m()
+                return redirect('/')
+        else:
+            context = {
+                'post': postobj,
+                'regform': regform,
+                'postform': postform,
+            }
+            return login(request, context, template_name='marketplace/err.html')
+    else:
+        regform = RegistrationForm()
+        postform = PostForm()
+        context = {
+            'post': postobj,
+            'regform': regform,
+            'postform': postform,
+        }
+        return render(request, 'marketplace/results.html', context)
