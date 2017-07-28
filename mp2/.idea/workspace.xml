@@ -46,9 +46,11 @@
       <file leaf-file-name="header.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/includes/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="28" column="155" lean-forward="false" selection-start-line="28" selection-start-column="155" selection-end-line="28" selection-end-column="155" />
-              <folding />
+            <state relative-caret-position="420">
+              <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+              <folding>
+                <element signature="e#1809#1829#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -880,9 +882,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/marketplace/templates/marketplace/includes/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="28" column="155" lean-forward="false" selection-start-line="28" selection-start-column="155" selection-end-line="28" selection-end-column="155" />
-          <folding />
+        <state relative-caret-position="420">
+          <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+          <folding>
+            <element signature="e#1809#1829#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
