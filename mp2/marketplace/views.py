@@ -2,11 +2,18 @@ from django.shortcuts import render, get_object_or_404, redirect
 from marketplace.forms import RegistrationForm, PostForm
 from django.contrib.auth.views import login
 from .models import User, Post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def index(request):
-    latest_post_list = Post.objects.order_by('-id')
+    latest_post_list = Post.objects.all().order_by('-id')
+    paginator = Paginator(latest_post_list, 10)
     search = request.GET.get('query')
+    page = request.GET.get('page')
+    itemnum = request.GET.get('c')
+
+    if itemnum:
+        paginator = Paginator(latest_post_list, itemnum)
 
     if search:
         latest_post_list = latest_post_list.filter(tags__name__in=[search]).distinct()
@@ -35,6 +42,12 @@ def index(request):
     else:
         postform = PostForm()
         regform = RegistrationForm()
+        try:
+            latest_post_list = paginator.page(page)
+        except PageNotAnInteger:
+            latest_post_list = paginator.page(1)
+        except EmptyPage:
+            latest_post_list = paginator.page(paginator.num_pages)
         context = {
             'latest_post_list': latest_post_list,
             'regform': regform,
