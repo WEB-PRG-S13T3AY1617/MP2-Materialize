@@ -7,16 +7,16 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
     latest_post_list = Post.objects.all().order_by('-id')
-    paginator = Paginator(latest_post_list, 10)
+
     search = request.GET.get('query')
     page = request.GET.get('page')
     itemnum = request.GET.get('c')
 
-    if itemnum:
-        paginator = Paginator(latest_post_list, itemnum)
-
     if search:
         latest_post_list = latest_post_list.filter(tags__name__in=[search]).distinct()
+    paginator = Paginator(latest_post_list, 10)
+    if itemnum:
+        paginator = Paginator(latest_post_list, itemnum)
 
     if request.method == 'POST':
         regform = RegistrationForm(request.POST)
@@ -33,6 +33,8 @@ def index(request):
                 postform.save_m2m()
                 return redirect('/')
         else:
+            postform = PostForm()
+            regform = RegistrationForm()
             context = {
                 'latest_post_list': latest_post_list,
                 'regform': regform,
@@ -74,6 +76,8 @@ def userdetails(request, user_id):
                 postform.save_m2m()
                 return redirect('/')
         else:
+            postform = PostForm()
+            regform = RegistrationForm()
             context = {
                 'userprofile': userobj,
                 'latest_posts': user_latest_post,
@@ -110,6 +114,8 @@ def photo(request, post_id):
                 postform.save_m2m()
                 return redirect('/')
         else:
+            postform = PostForm()
+            regform = RegistrationForm()
             context = {
                 'post': postobj,
                 'regform': regform,
@@ -144,6 +150,8 @@ def condresults(request, condition_name):
                 postform.save_m2m()
                 return redirect('/')
         else:
+            postform = PostForm()
+            regform = RegistrationForm()
             context = {
                 'post': postobj,
                 'regform': regform,
@@ -178,6 +186,8 @@ def typeresults(request, type_name):
                 postform.save_m2m()
                 return redirect('/')
         else:
+            postform = PostForm()
+            regform = RegistrationForm()
             context = {
                 'post': postobj,
                 'regform': regform,
@@ -212,6 +222,8 @@ def courseresults(request, course_name):
                 postform.save_m2m()
                 return redirect('/')
         else:
+            postform = PostForm()
+            regform = RegistrationForm()
             context = {
                 'post': postobj,
                 'regform': regform,
@@ -246,6 +258,8 @@ def tagresults(request, tag_name):
                 postform.save_m2m()
                 return redirect('/')
         else:
+            postform = PostForm()
+            regform = RegistrationForm()
             context = {
                 'post': postobj,
                 'regform': regform,
