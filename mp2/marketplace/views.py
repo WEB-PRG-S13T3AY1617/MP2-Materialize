@@ -18,6 +18,7 @@ def index(request):
                 obj.user = request.user
                 obj.image = postform.cleaned_data['image']
                 obj.save()
+                postform.save_m2m()
                 return redirect('/')
         else:
             context = {
@@ -38,5 +39,25 @@ def index(request):
 
 
 def userdetails(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
-    return render(request, 'marketplace/user.html', {'userprofile': user})
+    userobj = get_object_or_404(User, pk=user_id)
+    user_latest_post = Post.objects.filter(user=userobj).order_by('-id')
+    if request.method == 'POST':
+        regform = RegistrationForm(request.POST)
+        if regform.is_valid():
+            regform.save()
+            return redirect('/')
+        else:
+            context = {
+                'userprofile': userobj,
+                'latest_posts': user_latest_post,
+                'regform': regform,
+            }
+            return login(request, context, template_name='userdetails')
+    else:
+        regform = RegistrationForm()
+        context = {
+            'userprofile': userobj,
+            'latest_posts': user_latest_post,
+            'regform': regform,
+        }
+        return render(request, 'marketplace/user.html', context)
