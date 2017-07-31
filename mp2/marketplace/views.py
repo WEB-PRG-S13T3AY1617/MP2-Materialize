@@ -12,9 +12,11 @@ def index(request):
     page = request.GET.get('page')
     itemnum = request.GET.get('c')
 
+    paginator = Paginator(latest_post_list, 10)
+
     if search:
         latest_post_list = latest_post_list.filter(tags__name__in=[search]).distinct()
-    paginator = Paginator(latest_post_list, 10)
+
     if itemnum:
         paginator = Paginator(latest_post_list, itemnum)
 
@@ -153,6 +155,7 @@ def condresults(request, condition_name):
             postform = PostForm()
             regform = RegistrationForm()
             context = {
+                'query_item': condition_name,
                 'post': postobj,
                 'regform': regform,
                 'postform': postform,
@@ -162,6 +165,7 @@ def condresults(request, condition_name):
         regform = RegistrationForm()
         postform = PostForm()
         context = {
+            'query_item': condition_name,
             'post': postobj,
             'regform': regform,
             'postform': postform,
@@ -189,6 +193,7 @@ def typeresults(request, type_name):
             postform = PostForm()
             regform = RegistrationForm()
             context = {
+                'query_item': type_name,
                 'post': postobj,
                 'regform': regform,
                 'postform': postform,
@@ -198,6 +203,7 @@ def typeresults(request, type_name):
         regform = RegistrationForm()
         postform = PostForm()
         context = {
+            'query_item': type_name,
             'post': postobj,
             'regform': regform,
             'postform': postform,
@@ -225,6 +231,7 @@ def courseresults(request, course_name):
             postform = PostForm()
             regform = RegistrationForm()
             context = {
+                'query_item': course_name,
                 'post': postobj,
                 'regform': regform,
                 'postform': postform,
@@ -234,6 +241,7 @@ def courseresults(request, course_name):
         regform = RegistrationForm()
         postform = PostForm()
         context = {
+            'query_item': course_name,
             'post': postobj,
             'regform': regform,
             'postform': postform,
@@ -261,6 +269,7 @@ def tagresults(request, tag_name):
             postform = PostForm()
             regform = RegistrationForm()
             context = {
+                'query_item': tag_name,
                 'post': postobj,
                 'regform': regform,
                 'postform': postform,
@@ -270,6 +279,7 @@ def tagresults(request, tag_name):
         regform = RegistrationForm()
         postform = PostForm()
         context = {
+            'query_item': tag_name,
             'post': postobj,
             'regform': regform,
             'postform': postform,

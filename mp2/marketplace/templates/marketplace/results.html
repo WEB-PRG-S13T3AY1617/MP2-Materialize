@@ -2,6 +2,9 @@
 
 {% block body %}
     <div class="container">
+        <div class="col-md-12 col-sm-12" >
+            <h4>Filtered item: <strong>{{ query_item }}</strong></h4>
+        </div>
         <div class="row">
             {% for p in post %}
                 <div class="col-sm-6 col-md-3">
