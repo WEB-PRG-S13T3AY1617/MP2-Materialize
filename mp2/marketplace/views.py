@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from marketplace.forms import RegistrationForm, PostForm
+from marketplace.forms import RegistrationForm, PostForm, OfferForm
 from django.contrib.auth.views import login
 from .models import User, Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -12,10 +12,9 @@ def index(request):
     page = request.GET.get('page')
     itemnum = request.GET.get('c')
 
-    paginator = Paginator(latest_post_list, 10)
-
     if search:
         latest_post_list = latest_post_list.filter(tags__name__in=[search]).distinct()
+    paginator = Paginator(latest_post_list, 10)
 
     if itemnum:
         paginator = Paginator(latest_post_list, itemnum)
@@ -63,6 +62,7 @@ def index(request):
 def userdetails(request, user_id):
     userobj = get_object_or_404(User, pk=user_id)
     user_latest_post = Post.objects.filter(user=userobj).order_by('-id')
+
     if request.method == 'POST':
         regform = RegistrationForm(request.POST)
         postform = PostForm(request.POST, request.FILES)
@@ -97,6 +97,48 @@ def userdetails(request, user_id):
             'postform': postform,
         }
         return render(request, 'marketplace/user.html', context)
+
+
+def makeoffer(request, post_id):
+    postobj = get_object_or_404(Post, pk=post_id)
+
+    if request.method == 'POST':
+        regform = RegistrationForm(request.POST)
+        postform = PostForm(request.POST, request.FILES)
+        offerform = OfferForm(request.POST)
+        if regform.is_valid():
+            regform.save()
+            return redirect('/')
+        elif request.user.is_authenticated():
+            if postform.is_valid():
+                obj = postform.save(commit=False)
+                obj.user = request.user
+                obj.image = postform.cleaned_data['image']
+                obj.save()
+                postform.save_m2m()
+                return redirect('/')
+        else:
+            postform = PostForm()
+            regform = RegistrationForm()
+            offerform = OfferForm()
+            context = {
+                'postobj': postobj,
+                'regform': regform,
+                'postform': postform,
+                'offerform': offerform,
+            }
+            return login(request, context, template_name='marketplace/err.html')
+    else:
+        regform = RegistrationForm()
+        postform = PostForm()
+        offerform = OfferForm()
+        context = {
+            'postobj': postobj,
+            'regform': regform,
+            'postform': postform,
+            'offerform': offerform,
+        }
+        return render(request, 'marketplace/offer.html', context)
 
 
 def photo(request, post_id):

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from marketplace.models import Post
+from marketplace.models import Post, Offer
 
 
 class RegistrationForm(UserCreationForm):
@@ -61,3 +61,28 @@ class PostForm(forms.ModelForm):
             post.save()
 
         return post
+
+
+class OfferForm(forms.ModelForm):
+    type = forms.ChoiceField(choices=Offer.CHOICES, required=True)
+    amount = forms.DecimalField(decimal_places=2, max_digits=20)
+    secondhand = forms.ChoiceField(choices=Offer.CHOICES)
+
+    class Meta:
+        model = Offer
+        fields = (
+            'type',
+            'amount',
+            'secondhand',
+        )
+
+    def save(self, commit=True):
+        offer = super(OfferForm, self).save(commit=False)
+        offer.type = self.cleaned_data['type']
+        offer.amount = self.cleaned_data['amount']
+        offer.secondhand = self.cleaned_data['secondhand']
+
+        if commit:
+            offer.save()
+
+        return offer

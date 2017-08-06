@@ -37,7 +37,14 @@
                 <h3 style="margin-top: 0;">{{ userprofile.degree_or_office }}</h3>
             </div>
         </div>
+        <div>
+            {% if user.get_username == userprofile.username %}
+                <h4>Offers</h4>
+            {% endif %}
+        </div>
+        <hr />
         <h4>Latest Posts</h4>
+
         <div id="posts_5" class="row">
             {% for post in latest_posts|slice:':5' %}
                 <div class="col-sm-6 col-md-3">
