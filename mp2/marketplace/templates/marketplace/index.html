@@ -51,7 +51,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">{{ post.name }} {% if user.is_authenticated %}<a class="btn btn-primary" href="{% url 'marketplace:makeoffer' post.id %}">Make an Offer!</a>{% endif %}</h4>
+                                    <h4 class="modal-title">{{ post.name }} {% if not user.get_username == post.user.username %}<a class="btn btn-primary" href="{% url 'marketplace:makeoffer' post.id %}">Make an Offer!</a>{% endif %}</h4>
                                 </div>
                                 <div class="modal-body">
                                     <a href="{% url 'marketplace:photo' post.id %}"><img class="center-block" src="{{ post.image.url }}" height="245px"></a>
