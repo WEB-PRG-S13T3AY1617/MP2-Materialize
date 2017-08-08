@@ -1,1 +1,1 @@
-web: gunicorn mp2.mp2.wsgi --log-file -
+web: gunicorn mp2.wsgi --log-file -
