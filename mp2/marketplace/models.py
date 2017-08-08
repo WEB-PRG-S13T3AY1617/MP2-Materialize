@@ -35,7 +35,7 @@ class Offer(models.Model):
     )
     type = models.CharField(max_length=8, choices=CHOICES)
     amount = models.DecimalField(decimal_places=2, blank=True, max_digits=20)
-    secondhand = models.IntegerField(blank=True)
+    secondhand = models.CharField(max_length=50)
 
     def __str__(self):
         return self.post.name

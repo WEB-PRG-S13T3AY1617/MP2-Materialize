@@ -66,7 +66,7 @@ class PostForm(forms.ModelForm):
 class OfferForm(forms.ModelForm):
     type = forms.ChoiceField(choices=Offer.CHOICES, required=True)
     amount = forms.DecimalField(decimal_places=2, max_digits=20)
-    secondhand = forms.ChoiceField(choices=Offer.CHOICES)
+    secondhand = forms.ModelChoiceField(queryset=Post.objects.all())
 
     class Meta:
         model = Offer
