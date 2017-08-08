@@ -25,7 +25,7 @@ SECRET_KEY = 'rgz&z%505o2-7teha##x)87_4&4)x+x_&v@#qluhba6&2%^^*r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['newbeginningsmarketplace.herokuapp.com']
+ALLOWED_HOSTS = ['newbeginningsmarketplace.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
