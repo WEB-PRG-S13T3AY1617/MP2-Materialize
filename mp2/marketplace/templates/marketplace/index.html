@@ -3,6 +3,13 @@
 {% block script %}
     <script>
         $(document).ready(function () {
+
+            var zIndex = 1040 + (10 * $('.modal:visible').length);
+            $(this).css('z-index', zIndex);
+            setTimeout(function() {
+                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+            }, 0);
+
             $('#btn10').click(function () {
                 window.location.href = '?c=' + $('#btn10').html();
             });
