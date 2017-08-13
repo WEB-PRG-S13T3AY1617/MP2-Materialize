@@ -1,12 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from marketplace.forms import RegistrationForm, PostForm, OfferForm
 from django.contrib.auth.views import login
-from .models import User, Post
+from .models import User, Post, Offer
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def index(request):
     latest_post_list = Post.objects.all().order_by('-id')
+
+    if request.user.is_authenticated():
+        offers = Offer.objects.filter(user=request.user)
+    else:
+        offers = None
 
     search = request.GET.get('query')
     page = request.GET.get('page')
@@ -40,6 +45,7 @@ def index(request):
                 'latest_post_list': latest_post_list,
                 'regform': regform,
                 'postform': postform,
+                'offers': offers,
             }
             return login(request, context, template_name='marketplace/err.html')
     else:
@@ -55,6 +61,7 @@ def index(request):
             'latest_post_list': latest_post_list,
             'regform': regform,
             'postform': postform,
+            'offers': offers,
         }
         return render(request, 'marketplace/index.html', context)
 
@@ -62,6 +69,7 @@ def index(request):
 def userdetails(request, user_id):
     userobj = get_object_or_404(User, pk=user_id)
     user_latest_post = Post.objects.filter(user=userobj).order_by('-id')
+    offers = Offer.objects.filter(post__in=user_latest_post).order_by('-id')
 
     if request.method == 'POST':
         regform = RegistrationForm(request.POST)
@@ -85,6 +93,7 @@ def userdetails(request, user_id):
                 'latest_posts': user_latest_post,
                 'regform': regform,
                 'postform': postform,
+                'offers': offers,
             }
             return login(request, context, template_name='marketplace/err.html')
     else:
@@ -95,36 +104,41 @@ def userdetails(request, user_id):
             'latest_posts': user_latest_post,
             'regform': regform,
             'postform': postform,
+            'offers': offers,
         }
         return render(request, 'marketplace/user.html', context)
 
 
 def makeoffer(request, post_id):
     userobj = request.user
-    postobj = get_object_or_404(Post, pk=post_id)
     latest_post_list = Post.objects.filter(user=userobj).order_by('-id')
 
     if request.method == 'POST':
         regform = RegistrationForm(request.POST)
         postform = PostForm(request.POST, request.FILES)
         offerform = OfferForm(request.POST)
-        if regform.is_valid():
+
+        if offerform.is_valid():
+            offerobj = offerform.save(commit=False)
+            offerobj.user = request.user
+            offerobj.post = Post.objects.filter(id=post_id)[:1].get()
+            offerobj.save()
+            return redirect('/')
+        elif regform.is_valid():
             regform.save()
             return redirect('/')
-        elif request.user.is_authenticated():
-            if postform.is_valid():
-                obj = postform.save(commit=False)
-                obj.user = request.user
-                obj.image = postform.cleaned_data['image']
-                obj.save()
-                postform.save_m2m()
-                return redirect('/')
+        elif postform.is_valid():
+            obj = postform.save(commit=False)
+            obj.user = request.user
+            obj.image = postform.cleaned_data['image']
+            obj.save()
+            postform.save_m2m()
+            return redirect('/')
         else:
             postform = PostForm()
             regform = RegistrationForm()
             offerform = OfferForm()
             context = {
-                'postobj': postobj,
                 'regform': regform,
                 'postform': postform,
                 'offerform': offerform,
@@ -136,7 +150,6 @@ def makeoffer(request, post_id):
         postform = PostForm()
         offerform = OfferForm()
         context = {
-            'postobj': postobj,
             'regform': regform,
             'postform': postform,
             'offerform': offerform,

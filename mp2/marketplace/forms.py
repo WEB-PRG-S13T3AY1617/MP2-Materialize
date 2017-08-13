@@ -76,6 +76,14 @@ class OfferForm(forms.ModelForm):
             'secondhand',
         )
 
+    def is_valid(self):
+        valid = super(OfferForm, self).is_valid()
+
+        if not valid:
+            return valid
+
+        return True
+
     def save(self, commit=True):
         offer = super(OfferForm, self).save(commit=False)
         offer.type = self.cleaned_data['type']
