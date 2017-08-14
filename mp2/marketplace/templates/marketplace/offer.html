@@ -13,12 +13,12 @@
                 if ($('.typeselect').val() === 'Exchange') {
                     idsecondhand.show();
                     $('#secondhanddiv select').val($('#secondhanddiv select option:first').val());
-                    $('#amountdiv div input').val('');
+                    $('#amountdiv div input').val(null);
                     idamount.hide();
                 }
                 if ($('.typeselect').val() === 'Purchase') {
                     idsecondhand.hide();
-                    $('#secondhanddiv select').val('');
+                    $('#secondhanddiv select').val(null);
                     idamount.show();
                 }
             });
@@ -28,33 +28,38 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <h4>Make an Offer</h4>
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Make an Offer for {{ postobj.name }}</h4>
+                    </div>
+
                     <form role="form" method="post">
                         {% csrf_token %}
-                        <div class="form-group">
-                            <select class="form-control typeselect" id="id_type" name="type">
-                                <option value="Purchase">Purchase</option>
-                                <option value="Exchange">Exchange</option>
-                            </select>
-                        </div>
-                        <div id="amountdiv" class="form-group">
-                            <div class="input-group">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <select class="form-control typeselect" id="id_type" name="type">
+                                    <option value="Purchase">Purchase</option>
+                                    <option value="Exchange">Exchange</option>
+                                </select>
+                            </div>
+                            <div id="amountdiv" class="form-group">
+                                <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-usd"></span>
                         </span>
-                                <input type="number" min="0.01" step="0.01" max="999999999999999999.99" id="id_amount" name="amount" class="form-control input-sm" placeholder="Amount">
+                                    <input type="number" min="0.01" step="0.01" max="999999999999999999.99" id="id_amount" name="amount" class="form-control input-sm" placeholder="Amount">
+                                </div>
                             </div>
+                            <div id="secondhanddiv" class="form-group">
+                                <select class="form-control" id="id_secondhand" name="secondhand">
+                                    {% for post in posts %}
+                                        <option value="{{ post.id }}">{{ post.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
                         </div>
-                        <div id="secondhanddiv" class="form-group">
-                            <select class="form-control" id="id_secondhand" name="secondhand">
-                                {% for post in posts %}
-                                    <option value="{{ post }}">{{ post.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
                     </form>
                 </div>
             </div>

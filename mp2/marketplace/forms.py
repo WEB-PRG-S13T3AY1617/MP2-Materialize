@@ -65,8 +65,6 @@ class PostForm(forms.ModelForm):
 
 class OfferForm(forms.ModelForm):
     type = forms.ChoiceField(choices=Offer.CHOICES, required=True)
-    amount = forms.DecimalField(decimal_places=2, max_digits=20)
-    secondhand = forms.ModelChoiceField(queryset=Post.objects.all())
 
     class Meta:
         model = Offer
@@ -75,14 +73,6 @@ class OfferForm(forms.ModelForm):
             'amount',
             'secondhand',
         )
-
-    def is_valid(self):
-        valid = super(OfferForm, self).is_valid()
-
-        if not valid:
-            return valid
-
-        return True
 
     def save(self, commit=True):
         offer = super(OfferForm, self).save(commit=False)

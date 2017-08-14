@@ -70,6 +70,7 @@ def userdetails(request, user_id):
     userobj = get_object_or_404(User, pk=user_id)
     user_latest_post = Post.objects.filter(user=userobj).order_by('-id')
     offers = Offer.objects.filter(post__in=user_latest_post).order_by('-id')
+    myoffers = Offer.objects.filter(user=request.user, post__in=user_latest_post).order_by('-id')
 
     if request.method == 'POST':
         regform = RegistrationForm(request.POST)
@@ -94,6 +95,7 @@ def userdetails(request, user_id):
                 'regform': regform,
                 'postform': postform,
                 'offers': offers,
+                'myoffers': myoffers,
             }
             return login(request, context, template_name='marketplace/err.html')
     else:
@@ -105,6 +107,7 @@ def userdetails(request, user_id):
             'regform': regform,
             'postform': postform,
             'offers': offers,
+            'myoffers': myoffers,
         }
         return render(request, 'marketplace/user.html', context)
 
@@ -112,6 +115,7 @@ def userdetails(request, user_id):
 def makeoffer(request, post_id):
     userobj = request.user
     latest_post_list = Post.objects.filter(user=userobj).order_by('-id')
+    postobj = Post.objects.filter(id=post_id)[:1].get()
 
     if request.method == 'POST':
         regform = RegistrationForm(request.POST)
@@ -143,6 +147,7 @@ def makeoffer(request, post_id):
                 'postform': postform,
                 'offerform': offerform,
                 'posts': latest_post_list,
+                'postobj': postobj,
             }
             return login(request, context, template_name='marketplace/err.html')
     else:
@@ -154,6 +159,7 @@ def makeoffer(request, post_id):
             'postform': postform,
             'offerform': offerform,
             'posts': latest_post_list,
+            'postobj': postobj,
         }
         return render(request, 'marketplace/offer.html', context)
 
