@@ -190,7 +190,7 @@ def rejectoffer(request, offer_id):
     offerobj = Offer.objects.filter(id=offer_id)[:1].get()
 
     offerobj.approve_reject = False
-    offerobj.reason = request.GET.get()
+    offerobj.reason = request.POST.get("reasonR")
     offerobj.save()
     return redirect('/')
 
