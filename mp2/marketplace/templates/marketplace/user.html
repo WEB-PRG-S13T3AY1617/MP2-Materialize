@@ -60,6 +60,7 @@
                                         <div class="panel-heading" role="tab" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ offer.id }}" aria-expanded="false" aria-controls="collapse{{ offer.id }}">
                                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ offer.id }}" aria-expanded="false" aria-controls="collapse{{ offer.id }}">
                                                 [{{ offer.post }}] {{ offer.type }} for {% if offer.type == 'Purchase' %}${{ offer.amount }}{% else %}{{ offer.secondhand.name }}{% endif %}
+                                                {% if offer.approve_reject == 1 %}(APPROVED){% elif offer.approve_reject == 0 %}(REJECTED){% endif %}
                                                 <span class="pull-right"><strong>{{ offer.user.username }}</strong></span>
                                             </a>
                                         </div>
@@ -90,60 +91,63 @@
                                                     {{ offer.type }} for {% if offer.type == 'Purchase' %}${{ offer.amount }}{% else %}{{ offer.secondhand.name }}{% endif %}
                                                 {% endif %}
                                             </div>
-                                            <div class="panel-footer">
-                                                <a data-toggle="modal" data-target="#acceptModal{{ offer.id }}" href="javascript:void(0);" class="btn btn-success">Accept</a>
-                                                <a data-toggle="modal" data-target="#rejectModal{{ offer.id }}" href="javascript:void(0);" class="btn btn-danger">Reject</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="modal fade" id="acceptModal{{ offer.id }}" tabindex="-1" role="dialog">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title">Accept {{ offer.type }} for {% if offer.type == 'Purchase' %}${{ offer.amount }}{% else %}{{ offer.secondhand.name }}{% endif %}</h4>
+                                            {% if not offer.approve_reject == 1 and not offer.approve_reject == 0 %}
+                                                <div class="panel-footer">
+                                                    <a data-toggle="modal" data-target="#acceptModal{{ offer.id }}" href="javascript:void(0);" class="btn btn-success">Accept</a>
+                                                    <a data-toggle="modal" data-target="#rejectModal{{ offer.id }}" href="javascript:void(0);" class="btn btn-danger">Reject</a>
                                                 </div>
-                                                <form id="acceptform" role="form" method="post">
-                                                    {% csrf_token %}
-                                                    <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="reasonA">Reason:</label>
-                                                            <textarea style="resize: none" class="form-control" rows="5" id="reasonA" form="acceptform" name="reasonA"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a onclick="document.getElementById('acceptform').submit()" href="{% url 'marketplace:approveoffer' offer.id %}" class="btn btn-primary">Confirm Accept</a>
-                                                        <a data-dismiss="modal" class="btn">Cancel</a>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                            {% endif %}
                                         </div>
                                     </div>
-
-                                    <div class="modal fade" id="rejectModal{{ offer.id }}" tabindex="-1" role="dialog">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title">Reject {{ offer.type }} for {% if offer.type == 'Purchase' %}${{ offer.amount }}{% else %}{{ offer.secondhand.name }}{% endif %}</h4>
+                                    {% if not offer.approve_reject == 1 and not offer.approve_reject == 0 %}
+                                        <div class="modal fade" id="acceptModal{{ offer.id }}" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title">Accept {{ offer.type }} for {% if offer.type == 'Purchase' %}${{ offer.amount }}{% else %}{{ offer.secondhand.name }}{% endif %}</h4>
+                                                    </div>
+                                                    <form id="acceptform" role="form" method="post" action="{% url 'marketplace:approveoffer' offer.id %}">
+                                                        {% csrf_token %}
+                                                        <div class="modal-body">
+                                                            <div class="input-group">
+                                                                <label for="reasonA">Reason:</label>
+                                                                <input type="text" class="form-control" id="reasonA" name="reasonA">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary">Confirm Accept</button>
+                                                            <a data-dismiss="modal" class="btn">Cancel</a>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <form id="rejectform" role="form" method="post">
-                                                    {% csrf_token %}
-                                                    <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="reasonR">Reason:</label>
-                                                            <textarea style="resize: none" class="form-control" rows="5" id="reasonR" form="rejectform" name="reasonR"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a onclick="document.getElementById('rejectform').submit()" href="{% url 'marketplace:rejectoffer' offer.id %}" class="btn btn-primary">Confirm Reject</a>
-                                                        <a data-dismiss="modal" class="btn">Cancel</a>
-                                                    </div>
-                                                </form>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <div class="modal fade" id="rejectModal{{ offer.id }}" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title">Reject {{ offer.type }} for {% if offer.type == 'Purchase' %}${{ offer.amount }}{% else %}{{ offer.secondhand.name }}{% endif %}</h4>
+                                                    </div>
+                                                    <form id="rejectform" role="form" method="post" action="{% url 'marketplace:rejectoffer' offer.id %}">
+                                                        {% csrf_token %}
+                                                        <div class="modal-body">
+                                                            <div class="input-group">
+                                                                <label for="reasonR">Reason:</label>
+                                                                <input type="text" class="form-control" id="reasonR" name="reasonR">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary">Confirm Reject</button>
+                                                            <a data-dismiss="modal" class="btn">Cancel</a>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         </div>
@@ -158,6 +162,7 @@
                                         <div class="panel-heading" role="tab" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ myoffer.id }}" aria-expanded="false" aria-controls="collapse{{ myoffer.id }}">
                                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ myoffer.id }}" aria-expanded="false" aria-controls="collapse{{ myoffer.id }}">
                                                 [{{ myoffer.post }}] {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}
+                                                {% if myoffer.approve_reject == 1 %}(APPROVED){% elif myoffer.approve_reject == 0 %}(REJECTED){% endif %}
                                                 <span class="pull-right"><strong>{{ myoffer.user.username }}</strong></span>
                                             </a>
                                         </div>
@@ -184,14 +189,24 @@
                                                     <p><a href="{% url 'marketplace:userdetails' myoffer.secondhand.user.id %}">
                                                         {{ myoffer.secondhand.user }}
                                                     </a></p>
+                                                    {% if myoffer.approve_reject == 1 or myoffer.approve_reject == 0 %}
+                                                        <h4><strong>Reason</strong></h4>
+                                                        <p>{{ myoffer.reason }}</p>
+                                                    {% endif %}
                                                 {% else %}
                                                     {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}
+                                                    {% if myoffer.approve_reject == 1 or myoffer.approve_reject == 0 %}
+                                                        <h4><strong>Reason</strong></h4>
+                                                        <p>{{ myoffer.reason }}</p>
+                                                    {% endif %}
                                                 {% endif %}
                                             </div>
-                                            <div class="panel-footer">
-                                                <a data-toggle="modal" data-target="#updateModal{{ myoffer.id }}" href="javascript:void(0);" class="btn btn-success">Update</a>
-                                                <a data-toggle="modal" data-target="#cancelModal{{ myoffer.id }}" href="javascript:void(0);" class="btn btn-danger">Cancel</a>
-                                            </div>
+                                            {% if not myoffer.approve_reject == 1 and not myoffer.approve_reject == 0 %}
+                                                <div class="panel-footer">
+                                                    <a data-toggle="modal" data-target="#updateModal{{ myoffer.id }}" href="javascript:void(0);" class="btn btn-success">Update</a>
+                                                    <a data-toggle="modal" data-target="#cancelModal{{ myoffer.id }}" href="javascript:void(0);" class="btn btn-danger">Cancel</a>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </div>
 
@@ -263,7 +278,11 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">{{ post.name }} {% if not user.get_username == post.user.username %}<a class="btn btn-primary" href="{% url 'marketplace:makeoffer' post.id %}">Make an Offer!</a>{% endif %}</h4>
+                                <h4 class="modal-title">{{ post.name }}
+                                    {% if not user.get_username == post.user.username %}
+                                        <a class="btn btn-primary" href="{% url 'marketplace:makeoffer' post.id %}">Make an Offer!</a>
+                                    {% endif %}
+                                </h4>
                             </div>
                             <div class="modal-body">
                                 <a href="{% url 'marketplace:photo' post.id %}"><img class="center-block" src="{{ post.image.url }}" height="245px"></a>
@@ -318,7 +337,11 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">{{ post.name }}</h4>
+                                <h4 class="modal-title">{{ post.name }}
+                                    {% if not user.get_username == post.user.username %}
+                                        <a class="btn btn-primary" href="{% url 'marketplace:makeoffer' post.id %}">Make an Offer!</a>
+                                    {% endif %}
+                                </h4>
                             </div>
                             <div class="modal-body">
                                 <a href="{% url 'marketplace:photo' post.id %}"><img class="center-block" src="{{ post.image.url }}" height="245px"></a>

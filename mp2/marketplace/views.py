@@ -10,8 +10,10 @@ def index(request):
 
     if request.user.is_authenticated():
         offers = Offer.objects.filter(user=request.user)
+        offers2 = Offer.objects.filter(post__in=Post.objects.filter(user=request.user).order_by('-id'))
     else:
         offers = None
+        offers2 = None
 
     search = request.GET.get('query')
     page = request.GET.get('page')
@@ -46,6 +48,7 @@ def index(request):
                 'regform': regform,
                 'postform': postform,
                 'offers': offers,
+                'offers2': offers2,
             }
             return login(request, context, template_name='marketplace/err.html')
     else:
@@ -62,6 +65,7 @@ def index(request):
             'regform': regform,
             'postform': postform,
             'offers': offers,
+            'offers2': offers2,
         }
         return render(request, 'marketplace/index.html', context)
 
@@ -181,7 +185,7 @@ def approveoffer(request, offer_id):
     offerobj = Offer.objects.filter(id=offer_id)[:1].get()
 
     offerobj.approve_reject = True
-    offerobj.reason = request.POST.get("reasonA")
+    offerobj.reason = request.POST.get("reasonA", "")
     offerobj.save()
     return redirect('/')
 
@@ -190,7 +194,7 @@ def rejectoffer(request, offer_id):
     offerobj = Offer.objects.filter(id=offer_id)[:1].get()
 
     offerobj.approve_reject = False
-    offerobj.reason = request.POST.get("reasonR")
+    offerobj.reason = request.POST.get("reasonR", "")
     offerobj.save()
     return redirect('/')
 
