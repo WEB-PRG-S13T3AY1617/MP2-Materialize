@@ -84,3 +84,24 @@ class OfferForm(forms.ModelForm):
             offer.save()
 
         return offer
+#
+#
+# class AcceptRejectForm(forms.ModelForm):
+#     reason = forms.CharField(required=True, max_length=255)
+#
+#     class Meta:
+#         model = Offer
+#         fields = (
+#             'reason',
+#             'approve_reject',
+#         )
+#
+#     def save(self, commit=True):
+#         offer = super(AcceptRejectForm, self).save(commit=False)
+#         offer.reason = self.cleaned_data['reason']
+#         offer.approve_reject = self.cleaned_data['approve_reject']
+#
+#         if commit:
+#             offer.save()
+#
+#         return offer

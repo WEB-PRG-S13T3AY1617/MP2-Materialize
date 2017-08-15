@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from marketplace.forms import RegistrationForm, PostForm, OfferForm
+from marketplace.forms import RegistrationForm, PostForm, OfferForm #, AcceptRejectForm
 from django.contrib.auth.views import login
 from .models import User, Post, Offer
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -162,6 +162,37 @@ def makeoffer(request, post_id):
             'postobj': postobj,
         }
         return render(request, 'marketplace/offer.html', context)
+
+
+def canceloffer(request, myoffer_id):
+    myofferobj = Offer.objects.filter(id=myoffer_id)[:1].get()
+    myofferobj.delete()
+    return redirect('/')
+
+
+def updateoffer(request, myoffer_id):
+    myofferobj = Offer.objects.filter(id=myoffer_id)[:1].get()
+    postobj = Post.objects.filter(id=myofferobj.post.id)[:1].get()
+    myofferobj.delete()
+    return redirect('/' + 'offer/' + str(postobj.id) + '/')
+
+
+def approveoffer(request, offer_id):
+    offerobj = Offer.objects.filter(id=offer_id)[:1].get()
+
+    offerobj.approve_reject = True
+    offerobj.reason = request.POST.get("reasonA")
+    offerobj.save()
+    return redirect('/')
+
+
+def rejectoffer(request, offer_id):
+    offerobj = Offer.objects.filter(id=offer_id)[:1].get()
+
+    offerobj.approve_reject = False
+    offerobj.reason = request.GET.get()
+    offerobj.save()
+    return redirect('/')
 
 
 def photo(request, post_id):

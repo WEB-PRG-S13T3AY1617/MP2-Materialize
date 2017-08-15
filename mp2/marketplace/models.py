@@ -36,6 +36,8 @@ class Offer(models.Model):
     type = models.CharField(max_length=8, choices=CHOICES)
     amount = models.DecimalField(decimal_places=2, blank=True, max_digits=20, null=True)
     secondhand = models.ForeignKey(Post, null=True, blank=True, related_name='secondhand')
+    approve_reject = models.NullBooleanField(blank=True, null=True)
+    reason = models.TextField(blank=True, null=True, max_length=255)
 
     def __str__(self):
         return self.post.name

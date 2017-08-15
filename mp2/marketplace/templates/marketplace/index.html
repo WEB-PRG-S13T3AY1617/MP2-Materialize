@@ -61,9 +61,11 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title">{{ post.name }}
-                                        {% if not user.get_username == post.user.username %}
-                                            <a class="btn btn-primary" href="{% url 'marketplace:makeoffer' post.id %}">Make an Offer!</a>
-                                            <a class="btn" data-toggle="modal" data-target="#myoffersModal{{ post.id }}" href="javascript:void(0);">Show My Offers For This Item</a>
+                                        {% if user.is_authenticated %}
+                                            {% if not user.get_username == post.user.username %}
+                                                <a class="btn btn-primary" href="{% url 'marketplace:makeoffer' post.id %}">Make an Offer!</a>
+                                                <a class="btn" data-toggle="modal" data-target="#myoffersModal{{ post.id }}" href="javascript:void(0);">Show My Offers For This Item</a>
+                                            {% endif %}
                                         {% endif %}
                                     </h4>
                                 </div>
@@ -93,106 +95,113 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="modal fade" id="myoffersModal{{ post.id }}" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">My Offers</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                        {% for myoffer in offers %}
-                                            {% if myoffer.post.id == post.id %}
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ myoffer.id }}" aria-expanded="false" aria-controls="collapse{{ myoffer.id }}">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ myoffer.id }}" aria-expanded="false" aria-controls="collapse{{ myoffer.id }}">
-                                                        [{{ myoffer.post }}] {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}
-                                                        <span class="pull-right"><strong>{{ myoffer.user.username }}</strong></span>
-                                                    </a>
-                                                </div>
-                                                <div id="collapse{{ myoffer.id }}" class="panel-collapse collapse" role="tabpanel">
-                                                    <div class="panel-body text-center">
-                                                        {% if myoffer.type == 'Exchange' %}
-                                                            <h4><strong>{{ myoffer.secondhand.name }}</strong></h4>
-                                                            <img src="{{ myoffer.secondhand.image.url }}" style="height: 40%">
-                                                            <h4><strong>Quantity</strong></h4>
-                                                            <p>{{ myoffer.secondhand.quantity }}</p>
-                                                            <h4><strong>Condition</strong></h4>
-                                                            <p><a href="{% url 'marketplace:condresults' myoffer.secondhand.condition %}">{{ myoffer.secondhand.condition }}</a></p>
-                                                            <h4><strong>Type</strong></h4>
-                                                            <p><a href="{% url 'marketplace:typeresults' myoffer.secondhand.type %}">{{ myoffer.secondhand.type }}</a></p>
-                                                            {% if myoffer.secondhand.course %}
-                                                                <h4><strong>Course</strong></h4>
-                                                                <p><a href="{% url 'marketplace:courseresults' myoffer.secondhand.course %}">{{ myoffer.secondhand.course }}</a></p>
-                                                            {% endif %}
-                                                            <h4><strong>Tags</strong></h4>
-                                                            <p>{% for t in myoffer.secondhand.tags.all %}
-                                                                <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
-                                                            {% endfor %}</p>
-                                                            <h4><strong>User</strong></h4>
-                                                            <p><a href="{% url 'marketplace:userdetails' myoffer.secondhand.user.id %}">
-                                                                {{ myoffer.secondhand.user }}
-                                                            </a></p>
-                                                        {% else %}
-                                                            {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="panel-footer">
-                                                        <a data-toggle="modal" data-target="#updateModal{{ myoffer.id }}" href="javascript:void(0);" class="btn btn-success">Update</a>
-                                                        <a data-toggle="modal" data-target="#cancelModal{{ myoffer.id }}" href="javascript:void(0);" class="btn btn-danger">Cancel</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="modal fade" id="updateModal{{ myoffer.id }}" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title">Update Offer</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Are you sure you want to update {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <a class="btn btn-primary">Yes</a>
-                                                            <a data-dismiss="modal" class="btn">No</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="modal fade" id="cancelModal{{ myoffer.id }}" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title">Cancel Offer</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Are you sure you want to cancel {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <a class="btn btn-primary">Yes</a>
-                                                            <a data-dismiss="modal" class="btn">No</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {% endif %}
-                                        {% endfor %}
+                    {% if user.is_authenticated %}
+                        <div class="modal fade" id="myoffersModal{{ post.id }}" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">My Offers</h4>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
+                                    <div class="modal-body">
+                                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                            {% for myoffer in offers %}
+                                                {% if myoffer.post.id == post.id %}
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading" role="tab" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ myoffer.id }}" aria-expanded="false" aria-controls="collapse{{ myoffer.id }}">
+                                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ myoffer.id }}" aria-expanded="false" aria-controls="collapse{{ myoffer.id }}">
+                                                                [{{ myoffer.post }}] {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}
+                                                                {% if myoffer.approve_reject == 1 %}(APPROVED){% elif myoffer.approve_reject == 0 %}(REJECTED){% endif %}
+                                                                <span class="pull-right"><strong>{{ myoffer.user.username }}</strong></span>
+                                                            </a>
+                                                        </div>
+                                                        <div id="collapse{{ myoffer.id }}" class="panel-collapse collapse" role="tabpanel">
+                                                            <div class="panel-body text-center">
+                                                                {% if myoffer.type == 'Exchange' %}
+                                                                    <h4><strong>{{ myoffer.secondhand.name }}</strong></h4>
+                                                                    <img src="{{ myoffer.secondhand.image.url }}" style="height: 30%">
+                                                                    <h4><strong>Quantity</strong></h4>
+                                                                    <p>{{ myoffer.secondhand.quantity }}</p>
+                                                                    <h4><strong>Condition</strong></h4>
+                                                                    <p><a href="{% url 'marketplace:condresults' myoffer.secondhand.condition %}">{{ myoffer.secondhand.condition }}</a></p>
+                                                                    <h4><strong>Type</strong></h4>
+                                                                    <p><a href="{% url 'marketplace:typeresults' myoffer.secondhand.type %}">{{ myoffer.secondhand.type }}</a></p>
+                                                                    {% if myoffer.secondhand.course %}
+                                                                        <h4><strong>Course</strong></h4>
+                                                                        <p><a href="{% url 'marketplace:courseresults' myoffer.secondhand.course %}">{{ myoffer.secondhand.course }}</a></p>
+                                                                    {% endif %}
+                                                                    <h4><strong>Tags</strong></h4>
+                                                                    <p>{% for t in myoffer.secondhand.tags.all %}
+                                                                        <a href="{% url 'marketplace:tagresults' t.name %}">{{ t.name }}</a>
+                                                                    {% endfor %}</p>
+                                                                    <h4><strong>User</strong></h4>
+                                                                    <p><a href="{% url 'marketplace:userdetails' myoffer.secondhand.user.id %}">
+                                                                        {{ myoffer.secondhand.user }}
+                                                                    </a></p>
+                                                                    {% if myoffer.approve_reject == 1 or myoffer.approve_reject == 0 %}
+                                                                        <h4><strong>Reason</strong></h4>
+                                                                        <p>{{ myoffer.reason }}</p>
+                                                                    {% endif %}
+                                                                {% else %}
+                                                                    {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}
+                                                                    {% if myoffer.approve_reject == 1 or myoffer.approve_reject == 0 %}
+                                                                        <h4><strong>Reason</strong></h4>
+                                                                        <p>{{ myoffer.reason }}</p>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            </div>
+                                                            {% if not myoffer.approve_reject == 1 and not myoffer.approve_reject == 0 %}
+                                                                <div class="panel-footer">
+                                                                    <a data-toggle="modal" data-target="#updateModal{{ myoffer.id }}" href="javascript:void(0);" class="btn btn-success">Update</a>
+                                                                    <a data-toggle="modal" data-target="#cancelModal{{ myoffer.id }}" href="javascript:void(0);" class="btn btn-danger">Cancel</a>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="modal fade" id="updateModal{{ myoffer.id }}" tabindex="-1" role="dialog">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">Update Offer</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to update {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a href="{% url 'marketplace:updateoffer' myoffer.id %}" class="btn btn-primary">Yes</a>
+                                                                    <a data-dismiss="modal" class="btn">No</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="modal fade" id="cancelModal{{ myoffer.id }}" tabindex="-1" role="dialog">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">Cancel Offer</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to cancel {{ myoffer.type }} for {% if myoffer.type == 'Purchase' %}${{ myoffer.amount }}{% else %}{{ myoffer.secondhand.name }}{% endif %}?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a href="{% url 'marketplace:canceloffer' myoffer.id %}" class="btn btn-primary">Yes</a>
+                                                                    <a data-dismiss="modal" class="btn">No</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    {% endif %}
                 {% endfor %}
             </div>
 
