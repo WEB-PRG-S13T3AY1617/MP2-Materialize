@@ -1,7 +1,7 @@
 # MP2-Materialize
 
-## LABORADA, Denrick
-## PERDICES, Ramon
+##### LABORADA, Denrick
+##### PERDICES, Ramon
 
 https://youtu.be/6Wu5wdX8bN4
 ### New Beginnings Marketplace using Django
